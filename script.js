@@ -68,7 +68,11 @@ function playRound(hs, cs) {
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
-    let n = parseInt(prompt("Enter the Number of Rounds"));
+    let n = parseInt(prompt("Enter the Number of Rounds: "));
+    if (n < 1 || isNaN(n)) {
+        console.log("Invalid Input");
+        return;
+    }
     for (let i = 0; i < n; i++) {
         let computerChoice = getComputerChoice();
         let humanChoice = getHumanChoice();
@@ -76,32 +80,41 @@ function playGame() {
         console.log(`Your Selection in Round-${i + 1}: ${humanChoice}`);
         if (computerChoice === humanChoice) {
             console.log("TIED");
+            console.log("--------------------------------------");
         }
         else if (humanChoice == "rock" && computerChoice == "paper") {
             computerScore++;
             console.log("You Lost... 😒, Paper beats Rock");
+            console.log("--------------------------------------");
         }
         else if (humanChoice == "rock" && computerChoice == "scissors") {
             humanScore++;
             console.log("You Win... 😊, Rock beats Scissors");
+            console.log("--------------------------------------");
         }
         else if (humanChoice == "paper" && computerChoice == "rock") {
             humanScore++;
             console.log("You Win... 😊, Paper beats Rock");
+            console.log("--------------------------------------");
         }
         else if (humanChoice == "paper" && computerChoice == "scissors") {
             computerScore++;
             console.log("You Lost... 😒, Scissors beats Paper");
+            console.log("--------------------------------------");
         }
         else if (humanChoice == "scissors" && computerChoice == "paper") {
             humanScore++;
             console.log("You Win... 😊, Scissors beats Paper");
+            console.log("--------------------------------------");
         }
         else if (humanChoice == "scissors" && computerChoice == "rock") {
             computerScore++;
             console.log("You Lost... 😒, Rock beats Scissors");
+            console.log("--------------------------------------");
         }
     }
+
+    console.log(`Human Score = ${humanScore}, Computer Score = ${computerScore}`);
     if (humanScore > computerScore) {
         console.log("Final State: YOU WON!!!... 😉");
     }
@@ -112,4 +125,5 @@ function playGame() {
         console.log("Final State: TIE !!!... 👌");
     }
 }
-console.log(playGame());
+
+playGame();
