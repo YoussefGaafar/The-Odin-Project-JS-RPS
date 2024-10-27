@@ -9,7 +9,12 @@ function getComputerChoice() {
 //Getting Human Input
 function getHumanChoice() {
     let humanChoice = prompt("Choose from the following: (Rock, Paper, Scissors) ");
-    return humanChoice.toLowerCase();
+    humanChoice = humanChoice.toLowerCase();
+    while (humanChoice != "rock" && humanChoice != "paper" && humanChoice != "scissors") {
+        humanChoice = prompt("NO 😡.... Choose Again: (Rock, Paper, Scissors)");
+        humanChoice = humanChoice.toLowerCase();
+    }
+    return humanChoice;
 }
 // console.log("Your Choice Is:", getHumanChoice());
 
@@ -98,13 +103,13 @@ function playGame() {
         }
     }
     if (humanScore > computerScore) {
-        console.log("YOU WON!!!... 😉");
+        console.log("Final State: YOU WON!!!... 😉");
     }
     else if (computerScore > humanScore) {
-        console.log("YOU LOST!!!... 🥺");
+        console.log("Final State: YOU LOST!!!... 🥺");
     }
     else {
-        console.log("TIE !!!... 👌");
+        console.log("Final State: TIE !!!... 👌");
     }
 }
 console.log(playGame());
