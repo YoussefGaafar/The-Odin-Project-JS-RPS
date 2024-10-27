@@ -1,8 +1,7 @@
 // Getting Computer Input
 function getComputerChoice() {
     let choices = ["rock", "paper", "scissors"];
-    let computerChoice = choices[Math.floor(Math.random() * choices.length)];
-    return computerChoice;
+    return choices[Math.floor(Math.random() * choices.length)];
 }
 // console.log("Compuer Choice Is:", getComputerChoice());
 
