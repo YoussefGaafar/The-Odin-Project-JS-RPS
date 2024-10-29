@@ -4,14 +4,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors</title>
-    <script src="script.js"></script>
+    <title>Rock | Paper | Scissors</title>
     <!--Favicon-->
     <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-
+    <div class="container">
+        <h1>Rock Paper Scissors</h1>
+        <div class="rounds">
+            <input id="rounds-input" type="number" min="1" placeholder="Enter number of rounds">
+            <button type="button" id="rounds-button">Set Rounds</button>
+        </div>
+        <div class="inputs">
+            <div class="player-buttons">
+                <h4>Player Inputs</h4>
+                <button id="rock" type="button">ROCK</button>
+                <button id="paper" type="button">PAPER</button>
+                <button id="scissors" type="button">SCISSORS</button>
+            </div>
+            <div class="computer-input">
+                <h4>Computer Random Input</h4>
+                <h2>UNDEFINED</h2>
+            </div>
+        </div>
+        <div class="scores">
+            <div class="player-score">
+                <h2>Player</h2>
+                <span>0</span>
+            </div>
+            <div class="computer-score">
+                <h2>Computer</h2>
+                <span>0</span>
+            </div>
+        </div>
+        <div class="winner">
+            <h2>AND THE WINNER IS: </h2>
+            <button id="reset" type="button">RESET</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
