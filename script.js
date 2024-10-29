@@ -9,10 +9,12 @@ const choices = ["rock", "paper", "scissors"];
 const winnerBox = document.querySelector(".winner");
 const winnerPhrase = document.querySelector(".winner h2");
 const resetButton = document.querySelector(".winner button");
+const currentRound = document.querySelector(".rounds .current-round");
 
 let playerScore = parseInt(playerScoreSpan.textContent);
 let computerScore = parseInt(computerScoreSpan.textContent);
-let rounds = 0;
+let totalRounds = 0;
+let currentRoundNumber = 0;
 
 function getComputerChoice() {
     return choices[Math.floor(Math.random() * choices.length)];
@@ -21,6 +23,13 @@ function getComputerChoice() {
 function updateScoreBoard() {
     playerScoreSpan.textContent = playerScore;
     computerScoreSpan.textContent = computerScore;
+}
+
+function replaceTextAndAnimate(newText) {
+    computerInputField.textContent = newText; // Replace text
+    computerInputField.style.animation = 'none'; // Reset animation
+    computerInputField.offsetHeight; // Trigger reflow
+    computerInputField.style.animation = 'appear 0.8s ease-in-out 1'; // Reapply animation
 }
 
 function displayResult() {
@@ -39,53 +48,53 @@ function displayResult() {
 }
 
 function playRound(playerChoice, computerChoice) {
-    rounds--;
-    computerInputField.style.cssText = "display: block;";
+    totalRounds--;
+    currentRound.textContent = `Current Round: ${++currentRoundNumber}`;
     if (playerChoice === computerChoice) {
         console.log("TIED... 🟰");
         console.log("--------------------------------------");
-        computerInputField.textContent = computerChoice.toUpperCase();
+        replaceTextAndAnimate(computerChoice.toUpperCase());
     }
     else if (playerChoice == "rock" && computerChoice == "paper") {
         console.log("You Lost... 😒, Paper beats Rock");
         console.log("--------------------------------------");
         computerScore++;
-        computerInputField.textContent = computerChoice.toUpperCase();
+        replaceTextAndAnimate(computerChoice.toUpperCase());
     }
     else if (playerChoice == "rock" && computerChoice == "scissors") {
         console.log("You Won... 😊, Rock beats Scissors");
         console.log("--------------------------------------");
         playerScore++;
-        computerInputField.textContent = computerChoice.toUpperCase();
+        replaceTextAndAnimate(computerChoice.toUpperCase());
     }
     else if (playerChoice == "paper" && computerChoice == "rock") {
         console.log("You Won... 😊, Paper beats Rock");
         console.log("--------------------------------------");
         playerScore++;
-        computerInputField.textContent = computerChoice.toUpperCase();
+        replaceTextAndAnimate(computerChoice.toUpperCase());
     }
     else if (playerChoice == "paper" && computerChoice == "scissors") {
         console.log("You Lost... 😒, Scissors beats Paper");
         console.log("--------------------------------------");
         computerScore++;
-        computerInputField.textContent = computerChoice.toUpperCase();
+        replaceTextAndAnimate(computerChoice.toUpperCase());
     }
     else if (playerChoice == "scissors" && computerChoice == "paper") {
         console.log("You Won... 😊, Scissors beats Paper");
         console.log("--------------------------------------");
         playerScore++;
-        computerInputField.textContent = computerChoice.toUpperCase();
+        replaceTextAndAnimate(computerChoice.toUpperCase());
     }
     else if (playerChoice == "scissors" && computerChoice == "rock") {
         console.log("You Lost... 😒, Rock beats Scissors");
         console.log("--------------------------------------");
         computerScore++;
-        computerInputField.textContent = computerChoice.toUpperCase();
+        replaceTextAndAnimate(computerChoice.toUpperCase());
     }
 
     updateScoreBoard();
 
-    if (rounds === 0) {
+    if (totalRounds === 0) {
         displayResult();
     }
 }
@@ -94,13 +103,13 @@ function playRound(playerChoice, computerChoice) {
 // The Main Program 
 function main() {
     roundsButton.addEventListener("click", function () {
-        rounds = roundsInput.value;
+        totalRounds = roundsInput.value;
         // Empty Input Field
-        if (rounds === 0) {
+        if (totalRounds === 0) {
             alert("ERROR !! ❌, Empty Input Field...");
             location.reload(); //Reloads the Current Page
         }
-        else if (rounds < 1) {
+        else if (totalRounds < 1) {
             alert("Invalid Input ❌ Please Enter a Valid Number (Greater than 0)");
             location.reload();
         }
@@ -108,24 +117,26 @@ function main() {
             roundsInput.disabled = true;
             roundsButton.disabled = true;
             roundsInput.style.cssText = "font-weight: bold; text-align: center;";
-            alert(`Game Started With Rounds -> ${rounds}`);
+            alert(`Game Started With Rounds -> ${totalRounds}`);
             scoresBox.style.cssText = "display: flex;";
+            currentRound.textContent = `Current Round: ${currentRoundNumber}`;
+            currentRound.style.cssText = "display: block;";
         }
     });
 
     //Get the User Input and Calculate the Scores.
     inputButtons.forEach(button => {
         button.addEventListener("click", function (e) {
-            if (rounds === 0) {
+            if (totalRounds === 0) {
                 alert("ERROR !!! ❌, Fill  'number of rounds'  box First...");
                 location.reload(); //Reloads the Current Page
             }
             else {
                 console.log("Button Clicked: ", e.target.id);
-                console.log("Round of -- ", rounds);
+                console.log("Round of -- ", totalRounds);
                 console.log("Human Score Type = ", typeof playerScore, "Value = ", playerScore);
                 console.log("Computer Score = ", typeof computerScore, "Value = ", computerScore);
-                computerInputField.style.cssText = "display: block;";
+                // computerInputField.style.cssText = "opacity: 0; transition: opacity 1s ease -in -out;";
                 playRound(e.target.id, getComputerChoice());
             }
         });

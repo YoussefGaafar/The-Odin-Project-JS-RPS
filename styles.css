@@ -13,15 +13,11 @@ body {
     /*Align the Whole Container in the Center of the Page*/
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     height: 100vh;
 }
 
-.container h1 {
-    position: absolute;
-    top: 10%;
-}
 
 .container .rounds {
     display: flex;
@@ -47,6 +43,10 @@ body {
     cursor: pointer;
     /*Change the Cursor to Pointer*/
     background-color: #cbd5e1;
+}
+
+.container .rounds .current-round {
+    display: none;
 }
 
 
@@ -84,7 +84,21 @@ body {
 
 .inputs .computer-input h2 {
     color: red;
-    display: none;
+    animation: appear 0.8s ease-in-out 1;
+}
+
+@keyframes appear {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-24px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 
 .inputs .computer-input h4 {
